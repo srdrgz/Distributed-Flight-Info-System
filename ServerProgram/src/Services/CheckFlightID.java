@@ -31,15 +31,12 @@ public class CheckFlightID extends Service{
         boolean matching = FlightSystem.matchingFlights(destination, source);
         String r = FlightSystem.getMatchingFlightIds(destination,source);
         String reply = "";
-        //if(results.size() == 0){
         if(!matching){
             reply = "No flights match the source and destination places";
         }
         else{
             reply = String.format("The following flights match source and destination places: \n" + r);
 
-           // Marshalling replyMsgSubscribers = super.generateReply(status,requestID, reply);
-            // callbackHandler.broadcast(replyMsgSubscribers);
         }
         return super.generateReply(status,requestID, reply);
     }

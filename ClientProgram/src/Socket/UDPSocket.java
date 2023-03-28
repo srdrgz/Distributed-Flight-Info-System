@@ -19,7 +19,6 @@ public class UDPSocket implements Socket{
 
 
     public void send(Marshalling msg, InetAddress address, int port) throws IOException {
-      //  Console.print("Sending message");
         byte[] message = msg.getByteArray();
         DatagramPacket p = new DatagramPacket(message, message.length,address, port);
         send(p);

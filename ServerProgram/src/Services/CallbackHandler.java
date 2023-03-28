@@ -13,12 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * This class handles the callback service. It keeps a list of subscribers and sends a message to these subscribers
- * whenever the broadcast method is called, using the server socket
- * @author Shide
- *
- */
 public class CallbackHandler implements Runnable {
     private UDPSocket socket;
     private static ArrayList<Subscriber> allTheSubscribers;
@@ -29,13 +23,6 @@ public class CallbackHandler implements Runnable {
 
     }
 
-    /**
-     * Register subscriber to this callback service
-     * @param address - ip address of subscriber
-     * @param portNumber - port number of subscriber
-     * @param requestID - messageID of update message
-     * @param interval - duration that subscriber wishes to receive updates for
-     */
     public void registerSubscriber(InetAddress address, int portNumber, int requestID, int interval, int flightID){
         Console.print("Timeout interval in register subscriber class: "+ interval);
         Subscriber subscriber = new Subscriber(address, portNumber, requestID, interval, flightID);
@@ -84,15 +71,10 @@ public class CallbackHandler implements Runnable {
         }
     }
 
-    /**
-     * Send message to a subscriber
-     * @param s - recipient subscriber
-     * @param status - message status
-     * @throws IOException
-     */
+
     public void sendTerminationMessage(Subscriber s,OneByteInt status) throws IOException{
         Console.print("Sending termination message");
-        String reply = "Auto monitoring expired.";
+        String reply = "Monitoring Interval Time expired.";
         //System.out.println("subscriber messageId: " + s.messageId);
         Marshalling replyMessage = new Marshalling.Builder()
                 .setProperty(Service.STATUS, status)
@@ -102,10 +84,6 @@ public class CallbackHandler implements Runnable {
         socket.send(replyMessage, s.address, s.portNumber);
     }
 
-    /**
-     * Checks which subscribers have not expired, then send update message to all subscribers
-     * @param msg - BytePacker message
-     */
     public void broadcast(Marshalling msg, int flightID){
         try {
             checkValidity();

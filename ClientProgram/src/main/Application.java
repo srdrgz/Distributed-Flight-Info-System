@@ -23,7 +23,7 @@ public class Application {
             client.addService(1, new CheckFlightID());
             client.addService(2, new MakeReservation());
             client.addService(3, new CancelReservation());
-            client.addService(4, new RegisterCallbackService());
+            client.addService(4, new FlightMonitorRegistration());
 
             while(true){
                 client.printMenu();

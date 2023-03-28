@@ -67,7 +67,7 @@ public class ServerApplication {
             server.addService(1, new CheckFlightDetails(callbackHandler));
             server.addService(2, new MakeReservation(callbackHandler));
             server.addService(3, new CancelReservation(callbackHandler));
-            server.addService(4,new RegisterCallbackService(callbackHandler));
+            server.addService(4,new FlightMonitorRegistration(callbackHandler));
             //start server
             server.start();
         }catch (SocketException e) {

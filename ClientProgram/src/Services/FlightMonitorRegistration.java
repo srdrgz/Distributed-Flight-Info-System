@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.SocketTimeoutException;
 
-public class RegisterCallbackService extends Service{
+public class FlightMonitorRegistration extends Service{
 
     protected final static String TIMEOUT = "timeout";
     protected final static String FLIGHT_ID = "flightID";
-    public RegisterCallbackService(){
+    public FlightMonitorRegistration(){
         super(null);
     }
 
@@ -23,10 +23,9 @@ public class RegisterCallbackService extends Service{
         Console.print("---------------------Register Auto-monitoring---------------------------------");
         int interval = Console.inputInt("Enter monitor interval (minutes):");
         int flightID = Console.inputInt("Enter flight ID to monitor: ");
-        Console.print("Input monitor interval by user: " + interval);
         int requestID = client.getRequestID();	/*This should only be called once for each executeRequest as the message_id will be incremented each time  this method is called*/
         Marshalling packer = new Marshalling.Builder()
-                .setProperty(Service.SERVICE_ID, new OneByteInt(ClientHandler.REGISTER_CALLBACK))
+                .setProperty(Service.SERVICE_ID, new OneByteInt(ClientHandler.FLIGHT_MONITOR))
                 .setProperty(Service.REQUEST_ID, requestID)
                 .setProperty(TIMEOUT, interval)
                 .setProperty(FLIGHT_ID,flightID)
@@ -73,7 +72,7 @@ public class RegisterCallbackService extends Service{
 
     @Override
     public String ServiceName() {
-        return "Register Callback";
+        return "Flight Seat Monitor Registration";
     }
 
 

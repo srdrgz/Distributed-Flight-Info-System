@@ -14,7 +14,7 @@ public class ClientHandler {
     public static final int CHECK_FLIGHT_DETAILS = 1;
     public static final int MAKE_RESERVATION = 2;
     public static final int CANCEL_RESERVATION = 3;
-    public static final int REGISTER_CALLBACK = 4;
+    public static final int FLIGHT_MONITOR = 4;
 
     private UDPSocket socket = null;
     private int serverPortNumber;
