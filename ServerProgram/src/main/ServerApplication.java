@@ -41,6 +41,23 @@ public class ServerApplication {
             else if(serverChoice==2){
                 server = new AtMostOnceServer(socket); //at-most-once server
             }
+
+            /*Specify what type of socket to use*/
+            int socketType = console.inputInt(1, 4, "Select Socket Type: \n1)Normal Socket\n2)Socket with Sending Loss" +
+                    "\n3)Socket with Receiving Loss\n4)Socket with Sending and Receiving Loss\n");
+            if(socketType==2){
+                double probability = (1 - console.inputDouble(0.0, 1.0, "Probability of packet loss (in decimals) :"));
+                server.useCorruptedSocketSending(probability);
+            }
+            else if(socketType==3){
+                double probability = (1 - console.inputDouble(0.0, 1.0, "Probability of packet loss (in decimals) :"));
+                server.useCorruptedSocketReceiving(probability);
+            }
+            else if(socketType==4){
+                double probability = (1 - console.inputDouble(0.0, 1.0, "Probability of packet loss (in decimals) :"));
+                server.useCorruptedSocket(probability);
+            }
+
             //THREAD TO HANDLE REMOVAL OF EXPIRED USERS
             callbackHandler = new CallbackHandler(socket);
             Thread validityCheck = new Thread(callbackHandler);

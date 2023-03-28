@@ -38,4 +38,21 @@ public class Console {
         System.out.println(s);
         return Double.parseDouble(scanner.nextLine());
     }
+
+    public double inputDouble(double min, double max, String s){
+        System.out.println(s);
+        double choice = min;
+        while(true){
+            try{
+                choice = Double.parseDouble(scanner.nextLine());
+                if(choice >= min && choice <=max){
+                    return choice;
+                }
+                else{
+                    System.out.println("Invalid Choice");
+                    System.out.println(s);
+                }
+            }catch(NumberFormatException ignored){}
+        }
+    }
 }

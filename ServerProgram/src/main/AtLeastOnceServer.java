@@ -71,4 +71,30 @@ public class AtLeastOnceServer {
         return request;
     }
 
+    /**
+     * Used to simulate packet loss when sending
+     * @param probability - probability of message being sent out
+     */
+    public void useCorruptedSocketSending(double probability){
+        this.socket = new CorruptedSocketSending(this.socket, probability);
+        Console.print("Sending Probability Loss: " + String.valueOf(probability));
+    }
+    /**
+     * Used to simulate packet loss when receiving
+     * @param probability - probability message is received
+     */
+    public void useCorruptedSocketReceiving(double probability){
+        this.socket = new CorruptedSocketReceiving(this.socket, probability);
+        Console.print("\n" +
+                "        Console.print(\"Sending and Receiving Probability Loss: \" + String.valueOf(probability));Receiving Probability Loss: " + String.valueOf(probability));
+    }
+
+    /**
+     * Used to create corrupted messages to be sent or received.
+     * @param probability - probability messages are corrupted
+     */
+    public void useCorruptedSocket(double probability){
+        this.socket = new CorruptedSocket(this.socket, probability);
+        Console.print("Sending and Receiving Probability Loss: " + String.valueOf(probability));
+    }
 }
