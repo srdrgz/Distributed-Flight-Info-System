@@ -23,10 +23,15 @@ public class ServerApplication {
         try {
             System.out.println("Starting server");
             flightSystem = new FlightSystem();
+            //Added flights to test functionalities
             flightSystem.addFlightToSystem("Madrid", "London", "17:00", 150.50);
             flightSystem.addFlightToSystem("Tokyo", "Singapore", "7:30", 90.70);
             flightSystem.addFlightToSystem("Barcelona", "Munich", "11:50", 35.00);
-            flightSystem.addFlightToSystem("Barcelona", "Munich", "9:00", 30.00);
+            flightSystem.addFlightToSystem("Barcelona", "Munich", "9:00", 30.20);
+            flightSystem.addFlightToSystem("New York", "London", "16:40", 150.50);
+            flightSystem.addFlightToSystem("Doha", "Rome", "5:30", 900.70);
+            flightSystem.addFlightToSystem("Bangkok", "Seoul", "10:45", 135.70);
+            flightSystem.addFlightToSystem("Manila", "Dehli", "23:00", 230.30);
             //SET PARAMETERS TO START SERVER
             String addressInput = console.inputString("Input IP address hosting server on:");
             address = InetAddress.getByName(addressInput);
@@ -63,11 +68,12 @@ public class ServerApplication {
             Thread validityCheck = new Thread(callbackHandler);
             validityCheck.start();
             //Add services
-            server.addService(0, new CheckFlightID(callbackHandler));
-            server.addService(1, new CheckFlightDetails(callbackHandler));
+            server.addService(0, new CheckFlightID());
+            server.addService(1, new CheckFlightDetails());
             server.addService(2, new MakeReservation(callbackHandler));
             server.addService(3, new CancelReservation(callbackHandler));
             server.addService(4,new FlightMonitorRegistration(callbackHandler));
+            server.addService(5, new FlightByPriceRange());
             //start server
             server.start();
         }catch (SocketException e) {

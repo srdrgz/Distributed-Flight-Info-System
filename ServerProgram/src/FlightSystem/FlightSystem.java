@@ -87,6 +87,26 @@ public class FlightSystem {
         }
         return result;
     }
+    public static String getFlightsByPriceRange(double max, double min){
+        String result = "";
+        for (Map.Entry<Integer, Flight> entry : flights.entrySet()) {
+            double price = entry.getValue().getAirfare();
+            if (min <= price && price <= max){
+                result = String.format(result + "ID: " + entry.getKey() + "  Source: " + entry.getValue().getSource() + "    Destination: " + entry.getValue().getDestination()+ "   Departure time: "+ entry.getValue().getDeparture_time()+ " Air Fare: $" + price + "\n");
+            }
+        }
+        return String.format(result);
+    }
+    public static boolean matchingPriceRange (double max,double min) {
+        boolean matching = false;
+        for (Map.Entry<Integer, Flight> entry : flights.entrySet()) {
+            double price = entry.getValue().getAirfare();
+            if (min <= price && price <= max){
+                matching = true;
+            }
+        }
+        return matching;
+    }
 
     }
 

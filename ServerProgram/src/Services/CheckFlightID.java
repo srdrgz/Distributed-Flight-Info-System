@@ -12,12 +12,10 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class CheckFlightID extends Service{
-    private CallbackHandler callbackHandler;
     protected final static String SOURCE = "flightSource";
     protected final static String DESTINATION = "flightDestinaton";
-    public CheckFlightID(CallbackHandler callbackHandler) {
+    public CheckFlightID() {
         super(new Unmarshalling.Builder().setType(SOURCE, Unmarshalling.TYPE.STRING).setType(DESTINATION,Unmarshalling.TYPE.STRING).build());
-        this.callbackHandler = callbackHandler;
         //Create Unmarshallling class and set types for main variables to be sent, then build
     }
 

@@ -13,10 +13,9 @@ import java.net.InetAddress;
 
 public class CheckFlightDetails extends Service {
     protected final static String FLIGHT_ID = "flightId";
-    private CallbackHandler callbackHandler;
-    public CheckFlightDetails(CallbackHandler callbackHandler) {
+    public CheckFlightDetails() {
         super(new Unmarshalling.Builder().setType(FLIGHT_ID, Unmarshalling.TYPE.INTEGER).build());
-        this.callbackHandler = callbackHandler;
+
 
     }
 
@@ -24,7 +23,6 @@ public class CheckFlightDetails extends Service {
     public Marshalling handleService(InetAddress clientAddr, int clientPortNo, byte[] clientData, UDPSocket socket) throws IOException, NullPointerException {
         Unmarshalling.UnmarshalledMSG unpackedMsg = this.getUnmarshaller().parseByteArray(clientData);
         int flightID = unpackedMsg.getInteger(FLIGHT_ID);
-
         int requestID = unpackedMsg.getInteger(super.getRequestId());
         Flight result = FlightSystem.getFlightById(flightID);
         String reply = "";
@@ -35,8 +33,6 @@ public class CheckFlightDetails extends Service {
         else{
             reply = String.format("Flight ID: " + flightID + "\n" + "Departure Time: " + result.getDeparture_time() + "\n" +
                     "Source: " + result.getSource() + "\nDestination: " + result.getDestination() + "\nAirfare: $" + result.getAirfare() + "\nNumber of available seats: " + result.getNoAvailableSeats());
-          //  Marshalling replyMsgSubscriber = super.generateReply(status,requestID, reply);
-          //  callbackHandler.broadcast(replyMsgSubscriber);
 
         }
 

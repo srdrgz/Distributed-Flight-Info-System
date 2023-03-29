@@ -45,7 +45,6 @@ public class Flight {
     }
     public boolean cancelSeats (int requestedSeats){
         boolean success = true;
-        int bookedSeats = (max_seats - available_seats);
         if(requestedSeats > getNoBookedSeats()){
             success = false;
         } else{

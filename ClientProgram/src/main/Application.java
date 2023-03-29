@@ -24,6 +24,7 @@ public class Application {
             client.addService(2, new MakeReservation());
             client.addService(3, new CancelReservation());
             client.addService(4, new FlightMonitorRegistration());
+            client.addService(5, new FlightByPriceRange());
 
             while(true){
                 client.printMenu();
