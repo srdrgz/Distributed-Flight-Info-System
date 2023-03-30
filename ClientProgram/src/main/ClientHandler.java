@@ -9,8 +9,9 @@ import java.net.*;
 import java.util.Arrays;
 import java.util.HashMap;
 
+
 public class ClientHandler {
-    public static final int CHECK_FLIGHT_ID = 0; /*Service ID used to associate which service to call when msg gets transmitted*/
+    public static final int CHECK_FLIGHT_ID = 0;
     public static final int CHECK_FLIGHT_DETAILS = 1;
     public static final int MAKE_RESERVATION = 2;
     public static final int CANCEL_RESERVATION = 3;

@@ -7,6 +7,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.*;
 
+
 public class Application {
     public static void main(String[] args) {
 
@@ -18,7 +19,7 @@ public class Application {
         try{
 
             ClientHandler client = new ClientHandler(port,serverIPAddress, timeout*1000);
-
+            //Add all available services to the client instance to be called when request is sent
             client.addService(0, new CheckFlightDetails());
             client.addService(1, new CheckFlightID());
             client.addService(2, new MakeReservation());

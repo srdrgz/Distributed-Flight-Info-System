@@ -9,7 +9,8 @@ import main.Console;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.SocketTimeoutException;
-
+/*
+* */
 public abstract class Service {
     private final Unmarshalling unmarshaller;
     protected static final String STATUS = "status";
@@ -25,6 +26,7 @@ public abstract class Service {
                 .build()
                 .defineComponents(unmarshalling);
     }
+    // receiveProcedure() : receives the information from the socket through the client function receive() and
     public final Unmarshalling.UnpackedMsg receiveProcedure(ClientHandler client, Marshalling marshaller, int requestID ) throws IOException {
         while(true){
             try{
@@ -39,6 +41,7 @@ public abstract class Service {
             }
         }
     }
+
     public Unmarshalling getUnmarshaller() {
         return unmarshaller;
     }

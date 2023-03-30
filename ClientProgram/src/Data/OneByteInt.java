@@ -1,5 +1,6 @@
 package Data;
 
+// STATUS OF THE REQUEST
 public class OneByteInt {
     private int value;
 
